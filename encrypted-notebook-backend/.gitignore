@@ -1,0 +1,13 @@
+*.json
+*.xlsx
+*.spec
+
+.idea/
+dist/
+build/
+cfg/
+data/
+
+**/__pycache__
+**/test.py
+
