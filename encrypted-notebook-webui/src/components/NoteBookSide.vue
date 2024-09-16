@@ -75,7 +75,7 @@ const onSaveDialogConfirmBtnClicked = async () => {
     background-color: white;
     border-right: 1px solid rgba(1, 1, 1, 0.1);
     height: 100%;
-    min-width: 200px;
+    /* min-width: 200px; */
     width: fit-content;
     display: flex;
     flex-direction: column;
