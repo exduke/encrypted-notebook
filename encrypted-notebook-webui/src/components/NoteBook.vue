@@ -9,7 +9,7 @@
 
         <el-dialog v-model="isLoadDialogShow" :close-on-click-modal="false" :show-close="false"
             :close-on-press-escape="false" title="input encryption key">
-            <el-input ref="input" v-model="key" @keyup.native.enter="onLoadDialogConfirmBtnClicked" />
+            <el-input ref="input" v-model="key" @keyup.native.enter="onLoadDialogConfirmBtnClicked" show-password/>
             <template #footer>
                 <el-button type="danger" @click="isLoadDialogShow = false">
                     New

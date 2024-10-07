@@ -12,7 +12,7 @@
 
         <el-dialog :show-close="false" title="input encryption key"
             v-model="isSaveDialogShow">
-            <el-input v-model="key" />
+            <el-input v-model="key" show-password/>
             <template #footer>
                 <el-button @click="isSaveDialogShow = false">
                     Cancel
