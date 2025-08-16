@@ -6,10 +6,8 @@
 """
 from flask import Flask, render_template, request
 import webbrowser
-# import json
-
-from src.cfg import DEV, DATA_PATH, WEB_PATH, PORT
-from src.utils.rsa_local import encode, decode, summon_key_from_md5
+from cfg import DEV, DATA_PATH, WEB_PATH, PORT
+from utils import encode, decode
 
 app = Flask(__name__,
             static_folder=WEB_PATH,  # 设置静态文件夹目录
@@ -24,8 +22,7 @@ def index():
 
 @app.route('/save', methods=['POST'])
 def save():
-    n, e, _ = summon_key_from_md5(request.args['key'])
-    data = encode(request.data, e, n)
+    data = encode(request.data, bytes.fromhex(request.args['key']))
     with open(DATA_PATH + '/data', 'wb') as f:
         f.write(data)
     return 'succeed'
@@ -33,22 +30,19 @@ def save():
 
 @app.route('/load', methods=['GET'])
 def load():
-    n, _, d = summon_key_from_md5(request.args['key'])
     with open(DATA_PATH + '/data', 'rb') as f:
         data = f.read()
-    return decode(data, d, n)
+    return decode(data, bytes.fromhex(request.args['key']))
 
 
 @app.route('/encrypt', methods=['POST'])
 def encrypt():
-    n, e, _ = summon_key_from_md5(request.args['key'])
-    return encode(request.data, e, n)
+    return encode(request.data, bytes.fromhex(request.args['key']))
 
 
 @app.route('/decrypt', methods=['POST'])
 def decrypt():
-    n, _, d = summon_key_from_md5(request.args['key'])
-    return decode(request.data, d, n)
+    return decode(request.data, bytes.fromhex(request.args['key']))
 
 
 if __name__ == '__main__':

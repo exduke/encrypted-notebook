@@ -13,7 +13,6 @@ DEV = False
 if DEV:
     # pycharm
     ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
-    ROOT_PATH = os.path.dirname(ROOT_PATH)
 else:
     # pyinstaller
     ROOT_PATH = os.path.dirname(os.path.abspath(sys.executable))
@@ -23,7 +22,7 @@ DATA_PATH = ROOT_PATH + '\\data'
 
 # web path
 if DEV:
-    WEB_PATH = r'D:\Workspace\project\solution\encryted-notebook\encrypted-notebook-webui\dist'
+    WEB_PATH = r'..\encrypted-notebook-webui\dist'
 else:
     WEB_PATH = ROOT_PATH + '\\web'
 
