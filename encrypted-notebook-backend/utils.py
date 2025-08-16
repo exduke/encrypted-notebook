@@ -4,11 +4,14 @@
 @time    : 2025/8/16 1:23
 @author  : duke
 """
+import os
 import time
 from hashlib import md5
 import struct
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
+
+
 # import json
 
 
@@ -37,3 +40,7 @@ def decode(data, key):
     return data
 
 
+def get_sorted_files(dir_path, key=int):
+    files = os.listdir(dir_path)
+    files.sort(key=key)
+    return files

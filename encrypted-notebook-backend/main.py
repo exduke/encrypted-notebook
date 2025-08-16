@@ -6,8 +6,10 @@
 """
 from flask import Flask, render_template, request
 import webbrowser
-from cfg import DEV, DATA_PATH, WEB_PATH, PORT
-from utils import encode, decode
+from cfg import DEV, DATA_PATH, WEB_PATH, PORT, HISTORY_NUM
+from utils import encode, decode, get_sorted_files
+import os
+import time
 
 app = Flask(__name__,
             static_folder=WEB_PATH,  # 设置静态文件夹目录
@@ -23,14 +25,17 @@ def index():
 @app.route('/save', methods=['POST'])
 def save():
     data = encode(request.data, bytes.fromhex(request.args['key']))
-    with open(DATA_PATH + '/data', 'wb') as f:
+    with open(os.path.join(DATA_PATH, str(time.time_ns())), 'wb') as f:
         f.write(data)
+    files = get_sorted_files(DATA_PATH)
+    if len(files) > HISTORY_NUM:
+        os.remove(os.path.join(DATA_PATH, files[0]))
     return 'succeed'
 
 
 @app.route('/load', methods=['GET'])
 def load():
-    with open(DATA_PATH + '/data', 'rb') as f:
+    with open(os.path.join(DATA_PATH, get_sorted_files(DATA_PATH)[-1]), 'rb') as f:
         data = f.read()
     return decode(data, bytes.fromhex(request.args['key']))
 

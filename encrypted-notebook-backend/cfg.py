@@ -8,6 +8,7 @@ import os
 import sys
 
 DEV = False
+HISTORY_NUM = 5
 
 # root path
 if DEV:
