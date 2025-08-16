@@ -9,5 +9,7 @@ cfg/
 data/
 
 **/__pycache__
+
+*123.py
 **/test.py
 
