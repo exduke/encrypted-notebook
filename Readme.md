@@ -18,7 +18,7 @@ flask
 
 ## release
 
-[click here]()
+[click here](https://github.com/exduke/encrypted-notebook/releases)
 
 ## introdution
 
